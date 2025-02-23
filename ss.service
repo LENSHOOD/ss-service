@@ -1,0 +1,23 @@
+### Put me into /etc/systemd/system/shadowsocks.service
+
+[Unit]
+Description=Shadowsocks Proxy Service With KCPTUN
+After=network.target
+
+[Service]
+Environment="WORK_DIR="
+Environment="KCPTUN_BIN=${WORK_DIR}/client_linux_arm64"
+Environment="KCPTUN_CFG=${WORK_DIR}/kcp_client_config.json"
+Environment="SS_BIN=${WORK_DIR}/sslocal"
+Environment="SS_CFG=${WORK_DIR}/ss_config.json"
+
+ExecStartPre=/bin/bash ${WORK_DIR}/iptables_rules.sh add
+ExecStart=/bin/bash -c "${KCPTUN_BIN} -c ${KCPTUN_CFG} & ${SS_BIN} -c ${SS_CFG}"
+ExecStop=/bin/kill -TERM $MAINPID
+ExecStopPost=/bin/bash ${WORK_DIR}/iptables_rules.sh remove
+Restart=on-failure
+User=root
+Group=root
+
+[Install]
+WantedBy=multi-user.target

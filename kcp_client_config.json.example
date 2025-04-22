@@ -1,0 +1,14 @@
+{
+    "localaddr": ":2332",
+    "remoteaddr":"",
+    "key": "",
+    "crypt": "aes-192",
+    "mode": "fast3",
+    "mtu": 1400,
+    "datashard": 10,
+    "parityshard": 3,
+    "dscp": 46,
+    "nocomp": true,
+    "tcp": false
+}
+

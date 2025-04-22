@@ -1,0 +1,38 @@
+{
+  "server": "127.0.0.1",
+  "server_port": 2332,
+  "timeout": 300,
+  "method": "aes-256-gcm",
+  "password": "",
+  "mode": "tcp_and_udp",
+  "locals": [
+    {
+      "local_address": "127.0.0.1",
+      "local_port": 1080,
+      "protocol": "redir",
+      "tcp_redir": "redirect",
+      "udp_redir": "tproxy"
+    },{
+      "local_address": "0.0.0.0",
+      "local_port": 1081,
+      "protocol": "http"
+    },{
+      "local_address": "127.0.0.1",
+      "local_port": 53,
+      "protocol": "dns",
+      "local_dns_address": "114.114.114.114",
+      "remote_dns_address": "8.8.8.8"
+    }
+
+  ],
+  "log": {
+        "level": 1,
+        "format": {
+            "without_time": false
+        }
+    },
+    "runtime": {
+        "mode": "multi_thread",
+        "worker_count": 10
+    }
+}
